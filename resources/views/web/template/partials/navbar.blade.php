@@ -8,10 +8,13 @@
             </div>
             <div class="col-md-4 d-flex flex-row-reverse">
                 <div class="logout">
-                    <button type="button" class="btn btn-long m-2"><i
-                            class="fa-solid fa-right-from-bracket mx-2"></i><span>Logout</span></button>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-long m-2"><i
+                                class="fa-solid fa-right-from-bracket mx-2"></i><span>Logout</span></button>
+                    </form>
                 </div>
-                <div class="logout">
+                <div class="notification">
                     <button type="button" class="btn btn-circle m-2"><i class="fa-solid fa-bell"></i></button>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

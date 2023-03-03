@@ -32,24 +32,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request) // BELUM SELESAI
     {
         try {
             $fields = $request->validate([
-                'username' => 'required|string',
-                'email' => 'required|email:rfc,dns|unique:users,email',
+                'nis' => 'required|string',
                 'password' => 'required|string'
             ]);
 
             $user = User::create([
-                'username' => $fields['username'],
-                'email' => $fields['email'],
+                'nis' => $fields['nis'],
                 'password' => bcrypt($fields['password'])
             ]);
 
             RoleUser::create([
                 "user_id" => $user->id,
-                "role_id" => 2
+                "role_id" => 2 //default santri
             ]);
 
             $data = User::where('id', '=', $user->id)->get();

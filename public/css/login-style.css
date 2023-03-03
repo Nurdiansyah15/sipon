@@ -41,8 +41,14 @@
     height: 30px;
     font-size: 12px;
     font-weight: bold;
-    width: 100%;
     color: #ffffff;
+    width: 100%;
+}
+.input-box input:focus {
+    color: #ffffff;
+    background: transparent !important;
+    outline: none;
+    border: none;
 }
 
 .title {

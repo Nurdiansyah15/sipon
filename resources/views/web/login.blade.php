@@ -10,19 +10,30 @@
                 </div>
                 <div class="col-md-6">
                     <div class="login-form">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session()->has('failed'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('failed') }}
+                            </div>
+                        @endif
                         <div class="logo mb-3">
                             <img src="{{ asset('/img/logo-sipon-inverted.png') }}" alt="">
                         </div>
-                        <form>
+                        <form action="/login" method="POST">
+                            @csrf
                             <h3 class="title"> Sign In</h3>
 
                             <div class="input-box">
                                 <label for="">NIS</label>
-                                <input type="text" required>
+                                <input class="" name="nis" value="{{ old('nis') }}" type="text" required>
                             </div>
                             <div class="input-box">
                                 <label for="">Password</label>
-                                <input type="password" required>
+                                <input class="" name="password" type="password" required>
                             </div>
 
                             <div class="checkbox mb-3">
