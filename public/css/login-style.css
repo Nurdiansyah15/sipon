@@ -1,0 +1,51 @@
+.content {
+    padding: 100px;
+    margin: 0;
+    box-sizing: border-box;
+}
+.login-card {
+    height: 400px;
+    background: rgb(12, 127, 147);
+    background: linear-gradient(
+        115deg,
+        rgba(12, 127, 147, 1) 60%,
+        rgba(32, 112, 126, 1) 100%
+    );
+    color: white;
+}
+.logo img {
+    height: 80px;
+}
+.login-photo {
+    background-size: cover;
+    height: 400px;
+    border-radius: 15px 0 0 15px;
+    background-position: center;
+}
+.login-form {
+    padding: 20px;
+}
+.input-box {
+    border-bottom: 2px solid white;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.input-box label {
+    position: relative;
+}
+
+.input-box input {
+    background: transparent;
+    outline: none;
+    border: none;
+    height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+    color: #ffffff;
+}
+
+.title {
+    color: white;
+    margin-bottom: 10px;
+}
