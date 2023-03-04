@@ -64,6 +64,14 @@
                                     <h4>Pendaftaran Santri Baru</h4>
                                 </div>
                             </div>
+                            <div class="btn item-service text-center">
+                                <div class="icon mb-3 mt-4">
+                                    <i class="fa-regular fa-file fa-3x"></i>
+                                </div>
+                                <div class="title-item-service">
+                                    <h4>Administrasi</h4>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

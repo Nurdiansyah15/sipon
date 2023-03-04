@@ -1,5 +1,5 @@
 .content {
-    padding: 100px;
+    padding: 150px;
     margin: 0;
     box-sizing: border-box;
 }
@@ -18,9 +18,9 @@
 }
 .login-photo {
     background-size: cover;
+    background-position: center;
     height: 400px;
     border-radius: 15px 0 0 15px;
-    background-position: center;
 }
 .login-form {
     padding: 20px;
@@ -40,7 +40,7 @@
     border: none;
     height: 30px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 300;
     color: #ffffff;
     width: 100%;
 }
@@ -54,4 +54,61 @@
 .title {
     color: white;
     margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        background: rgb(12, 127, 147);
+        background: linear-gradient(
+            115deg,
+            rgba(12, 127, 147, 1) 100%,
+            rgba(32, 112, 126, 1) 100%
+        );
+    }
+    .content {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        background: transparent;
+    }
+    .login-photo {
+        position: absolute;
+        visibility: hidden;
+    }
+    .login-card {
+        height: 100%;
+        border-radius: 0% !important;
+        box-shadow: none !important;
+        background: transparent;
+    }
+    .logo {
+        height: 100px;
+        display: flex;
+        justify-content: center;
+    }
+    .logo img {
+        height: 120px;
+    }
+    form {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .input-box {
+        border-bottom: 2px solid white;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+    .title {
+        color: white;
+        margin-bottom: 10px;
+        font-size: 30px !important;
+    }
+    .input-box label {
+        position: relative;
+        font-size: 18px;
+    }
+    .input-box input {
+        font-size: 14px;
+        font-weight: 300;
+    }
 }

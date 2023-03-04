@@ -11,7 +11,7 @@
                     <form action="/logout" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-long m-2"><i
-                                class="fa-solid fa-right-from-bracket mx-2"></i><span>Logout</span></button>
+                                class="fa-solid fa-right-from-bracket mx-2"></i>Logout</button>
                     </form>
                 </div>
                 <div class="notification">
