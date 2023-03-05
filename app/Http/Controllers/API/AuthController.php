@@ -3,44 +3,47 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
-use App\Models\Santri;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\RoleUser;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function login(Request $request) //BELUM SELESAI
+    public function login(Request $request)
     {
-        $fields = $request->validate([
+        $request->validate([
             'nis' => 'required|string',
             'password' => 'required|string'
         ]);
 
-        // Check NIS
-        $user = User::where('nis_santri', $fields['nis'])->first();
+        $user = User::where('nis', $request->nis)->first();
 
-        // Check password
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
-            return response([
-                'message' => 'Bad creds'
-            ], 401);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'nis' => ['The provided credentials are incorrect.'],
+            ]);
         }
 
         $token = $user->createToken('sipontoken')->plainTextToken;
 
         $response = [
-            'user' => $user,
+            'nis' => $user,
             'token' => $token
         ];
 
         return response($response, 201);
     }
 
-    public function logout(Request $request) //BELUM SELESAI
+    public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->validate([
+            'nis' => 'required|string',
+        ]);
+
+        $user = User::where('nis', $request->nis)->first();
+
+        $user->tokens()->delete();
 
         return [
             'message' => 'Logged out'

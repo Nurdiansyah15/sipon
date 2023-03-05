@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\AuthController;
+use App\Http\Controllers\WEB\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('web.dashboard');
-    });
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 });

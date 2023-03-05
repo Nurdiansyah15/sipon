@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -17,8 +17,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'nis' => 'required',
-            'password' => 'required'
+            'nis' => 'required|string',
+            'password' => 'required|string'
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -31,8 +31,7 @@ class AuthController extends Controller
                 'token' => $token
             ];
 
-
-            $request->session()->put('data', Crypt::encryptString(json_encode($data)));
+            $request->session()->put('sipon_session', json_encode($data));
 
             $request->session()->regenerate();
 
@@ -41,9 +40,19 @@ class AuthController extends Controller
 
         return back()->with('failed', 'Login failed!');
     }
-    public function logout(Request $request) //BELUM SELESAI kurang delete cookie
+    public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->validate([
+            'nis' => 'string',
+        ]);
+
+        $user = User::where('nis', $request->nis)->first();
+
+        if ($user) {
+            $user->tokens()->delete();
+        } else {
+            $request->user()->tokens()->delete();
+        }
 
         Auth::logout();
 
@@ -51,7 +60,9 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        $request->session()->forget('data');
+        $request->session()->forget('sipon_session');
+
+        setcookie('sipon_session', '', time() - 1);
 
         return redirect('/');
     }

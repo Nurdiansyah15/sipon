@@ -23,16 +23,16 @@ use App\Http\Controllers\API\v1\SantriController;
 // });
 
 
-//auth
+//auth api hanya digunakan untuk request aplikasi mobile
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']); //user logout
+Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::post('/user', [UserController::class, 'create']); //cretae one user
 
 Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         //user
         Route::get('/user', [UserController::class, 'index']); //get all user
+        Route::post('/user', [UserController::class, 'create']); //cretae one user
         Route::get('/user/{id}', [UserController::class, 'show']); //get one user with id
         Route::put('/user/{id}', [UserController::class, 'update']); //update one user with id
         Route::delete('/user/{id}', [UserController::class, 'destroy']); //destroy one user with id

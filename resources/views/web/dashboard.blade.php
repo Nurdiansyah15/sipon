@@ -16,6 +16,16 @@
                             <h2>Layanan</h2>
                         </div>
                         <div class="group-service row mx-5 my-5">
+                            {{-- https://santri.kyaigalangsewu.net --}}
+                            <a class="btn item-service text-center" target="_blank"
+                                href="http://127.0.0.1:8000?data={{ $data }}">
+                                <div class="icon mb-3 mt-4">
+                                    <i class="fa-solid fa-users fa-3x"></i>
+                                </div>
+                                <div class="title-item-service">
+                                    <h4>Kesantrian</h4>
+                                </div>
+                            </a>
                             <div class="btn item-service text-center">
                                 <div class="icon mb-3 mt-4">
                                     <i class="fa-solid fa-file fa-3x"></i>
