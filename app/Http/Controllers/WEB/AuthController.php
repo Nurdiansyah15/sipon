@@ -42,18 +42,6 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->validate([
-            'nis' => 'string',
-        ]);
-
-        $user = User::where('nis', $request->nis)->first();
-
-        if ($user) {
-            $user->tokens()->delete();
-        } else {
-            $request->user()->tokens()->delete();
-        }
-
         Auth::logout();
 
         $request->session()->invalidate();
@@ -61,8 +49,6 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         $request->session()->forget('sipon_session');
-
-        setcookie('sipon_session', '', time() - 1);
 
         return redirect('/');
     }

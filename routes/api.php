@@ -30,6 +30,11 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
+        //token check
+        Route::get('/token', function () {
+            return response('Valid', 200);
+        });
+
         //user
         Route::get('/user', [UserController::class, 'index']); //get all user
         Route::post('/user', [UserController::class, 'create']); //cretae one user
