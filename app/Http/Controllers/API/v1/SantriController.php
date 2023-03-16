@@ -19,6 +19,7 @@ class SantriController extends Controller
      */
     public function index()
     {
+        // pa 10001 pi 10002
         $santris = Santri::all();
 
         if ($santris) {
@@ -36,13 +37,11 @@ class SantriController extends Controller
     public function create(Request $request)
     {
         $fields = $request->validate([
-            'username' => 'required|string',
-            'email' => 'required|email:rfc,dns',
             'nis' => 'required|string|unique:santris,nis'
         ]);
 
         // Check email
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::where('username', $fields['nis'])->first();
         if ($user) {
 
             $santri = Santri::create([
@@ -110,32 +109,14 @@ class SantriController extends Controller
     public function update(Request $request, $nis)
     {
         try {
-            $request->validate([
-                'nis' => 'required|string',
-                'user_id' => 'required|integer',
-                'program' => 'string',
-                'fullname' => 'string',
-                'dob' => 'string',
-                'pob' => 'string',
-                'username' => 'string',
-                'username' => 'string',
-                'username' => 'string',
-                'username' => 'string',
-                'username' => 'string',
-                'username' => 'string',
-                'username' => 'string',
-                'username' => 'string',
+            $fields = $request->validate([
+                'fullname' => 'required|string',
             ]);
 
+            Santri::where('nis', $nis)
+                ->update($fields);
 
-            $santri = Santri::where('nis', '=', $nis)->get();
-
-            $santri->update([
-                'username' => (isset($request->username)) ? $request->username : $santri->username,
-                'email' => (isset($request->email)) ? $request->email : $santri->email
-            ]);
-
-            $data = User::where('id', '=', $santri->id)->get();
+            $data = Santri::where('nis', '=', $nis)->first();
 
             if ($data) {
                 return ApiFormatter::createApi(200, 'Success', $data);

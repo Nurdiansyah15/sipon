@@ -36,12 +36,12 @@ class UserController extends Controller
     {
         try {
             $fields = $request->validate([
-                'nis' => 'required|string',
+                'username' => 'required|string|unique:users,username',
                 'password' => 'required|string'
             ]);
 
             $user = User::create([
-                'nis' => $fields['nis'],
+                'username' => $fields['username'],
                 'password' => bcrypt($fields['password'])
             ]);
 
@@ -112,16 +112,14 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'username' => 'string',
-                'email' => 'email:rfc,dns'
+                'username' => 'string'
             ]);
 
 
             $user = User::findOrFail($id);
 
             $user->update([
-                'username' => (isset($request->username)) ? $request->username : $user->username,
-                'email' => (isset($request->email)) ? $request->email : $user->email
+                'username' => (isset($request->username)) ? $request->username : $user->username
             ]);
 
             $data = User::where('id', '=', $user->id)->get();
@@ -144,7 +142,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // try {
         $user = User::where('id', '=', $id)->first();
         if ($user) {
             $user->delete();

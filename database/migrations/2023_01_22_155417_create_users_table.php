@@ -13,9 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
+        // Schema::create('users', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('nis', 50)->index()->unique();
+        //     $table->string('password', 255);
+        //     $table->rememberToken();
+        //     $table->timestamps();
+        // });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nis', 50)->index()->unique();
+            $table->string('username')->unique();
             $table->string('password', 255);
             $table->rememberToken();
             $table->timestamps();
