@@ -31,18 +31,16 @@ class SecActsPermitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $id)
+    public function create(Request $request)
     {
         try {
             $fields = $request->validate([
                 'nis' => 'string|required',
-                'user_id' => 'integer',
+                'nis_user' => 'string|required',
                 'sec_acts_id' => 'integer|required',
                 'confirmed' => 'boolean|required',
                 'reason' => 'string|required'
             ]);
-
-            $fields['user_id'] = $id;
 
             $data = SecActsPermits::create($fields);
 
@@ -107,7 +105,7 @@ class SecActsPermitsController extends Controller
         try {
             $fields = $request->validate([
                 'nis' => 'string',
-                'user_id' => 'integer',
+                'nis_user' => 'string',
                 'sec_acts_id' => 'integer',
                 'confirmed' => 'boolean',
                 'reason' => 'string'

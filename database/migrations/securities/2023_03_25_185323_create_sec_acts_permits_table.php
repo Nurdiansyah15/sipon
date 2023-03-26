@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nis', 50)->constrained()->required(); //
             $table->foreign('nis')->references('nis')->on('santris')->cascadeOnDelete();
-            $table->unsignedBigInteger('user_id')->constrained()->required();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('nis_user')->constrained()->required();
+            $table->foreign('nis_user')->references('nis_santri')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('sec_acts_id')->constrained()->required(); //
             $table->foreign('sec_acts_id')->references('id')->on('sec_acts')->cascadeOnDelete();
             $table->boolean('confirmed', 1);

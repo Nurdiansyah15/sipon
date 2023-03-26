@@ -22,7 +22,8 @@ return new class extends Migration
         // });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
+            $table->string('nis_santri', 50)->unique()->constrained()->required();
+            $table->foreign('nis_santri')->references('nis')->on('santris')->cascadeOnDelete();
             $table->string('password', 255);
             $table->rememberToken();
             $table->timestamps();

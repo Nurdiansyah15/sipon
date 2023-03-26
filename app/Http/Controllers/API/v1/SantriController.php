@@ -70,38 +70,28 @@ class SantriController extends Controller
      */
     public function create(Request $request)
     {
-        $fields = $request->validate([
-            'username' => 'string|required',
-            'fullname' => 'string|required',
-            'program' => 'string|required',
-            'option' => 'string|required',
-        ]);
+        try {
+            $fields = $request->validate([
+                'nis' => 'string',
+                'fullname' => 'string|required',
+                'nickname' => 'string|required',
+                'email' => 'string|email:rfc,dns|required',
+                'program' => 'string|required',
+                'option' => 'string|required',
+            ]);
 
-
-        // Check email
-        $user = User::where('username', $fields['username'])->first();
-        if ($user !== null) {
-
-            $fields['nis'] = NisGenerator::get($fields['option']);
-            $fields['user_id'] = $user->id;
+            if (!isset($fields['nis'])) {
+                $fields['nis'] = NisGenerator::get($fields['option']);
+            }
             $fields['status'] = '1';
             $fields['sbc'] = '1';
             $fields['joined_at'] = Carbon::now()->toDateTimeString();
 
             $santri = Santri::create($fields);
 
-            $data = Santri::where('nis', $santri->nis)->with('user')->first();
-
-            if ($data) {
-                return ApiFormatter::createApi(201, 'Success', $data);
-            } else {
-                return ApiFormatter::createApi(500, 'Failed');
-            }
-        } else {
-
             $newUser = User::create([
-                'username' => $fields['username'],
-                'password' => bcrypt($fields['username'])
+                'nis_santri' => $fields['nis'],
+                'password' => bcrypt($fields['nis'])
             ]);
 
             RoleUser::create([
@@ -109,14 +99,6 @@ class SantriController extends Controller
                 "role_id" => 2 //default santri
             ]);
 
-            $fields['nis'] = NisGenerator::get($fields['option']);
-            $fields['user_id'] = $newUser->id;
-            $fields['status'] = '1';
-            $fields['sbc'] = '1';
-            $fields['joined_at'] = Carbon::now()->toDateTimeString();
-
-            $santri = Santri::create($fields);
-
             $data = Santri::where('nis', $santri->nis)->with('user')->first();
 
             if ($data) {
@@ -124,6 +106,8 @@ class SantriController extends Controller
             } else {
                 return ApiFormatter::createApi(500, 'Failed');
             }
+        } catch (ValidationException $error) {
+            return ApiFormatter::createApi(400, $error->errors());
         }
     }
 
@@ -148,10 +132,10 @@ class SantriController extends Controller
     {
         $santri = santri::where('nis', $nis)->first();
 
-        if ($santri) {
+        if ($santri != null) {
             return ApiFormatter::createApi(200, 'Success', $santri);
         } else {
-            return ApiFormatter::createApi(400, 'Bad request');
+            return ApiFormatter::createApi(400, 'Bad request, santri not found');
         }
     }
 
@@ -250,6 +234,12 @@ class SantriController extends Controller
      */
     public function destroy($nis)
     {
-        //automatic delete after delete user reference
+        $santri = Santri::where('nis', $nis)->first();
+        if ($santri) {
+            $santri->delete();
+            return ApiFormatter::createApi(200, 'Success destroy data');
+        } else {
+            return ApiFormatter::createApi(400, 'Failed');
+        }
     }
 }

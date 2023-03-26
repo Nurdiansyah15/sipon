@@ -38,10 +38,9 @@ Route::prefix('v1')->group(function () {
 
         //user 
         Route::get('/user', [UserController::class, 'index']); //get all user ( sudah )
-        // Route::post('/user', [UserController::class, 'create']); //cretae one user ( sudah )
         Route::get('/user/{id}', [UserController::class, 'show']); //get one user with id  ( sudah )
-        Route::put('/user/{id}', [UserController::class, 'update']); //update one user with id ( sudah )
-        Route::delete('/user/{id}', [UserController::class, 'destroy']); //destroy one user with id ( sudah )
+        // Route::post('/user', [UserController::class, 'create']); //cretae one user ( sudah )
+        // Route::put('/user/{id}', [UserController::class, 'update']); //update one user with id ( sudah )
         //santri
         Route::get('/santri', [SantriController::class, 'index']); // ( sudah )
         Route::get('/santri/pa', [SantriController::class, 'boys']); // ( sudah )
@@ -49,14 +48,14 @@ Route::prefix('v1')->group(function () {
         Route::post('/santri', [SantriController::class, 'create']); //( sudah ) data required username
         Route::get('/santri/{nis}', [SantriController::class, 'show']); //(sudah)
         Route::put('/santri/{nis}', [SantriController::class, 'update']); // ( sudah )
+        Route::delete('/santri/{nis}', [SantriController::class, 'destroy']); //destroy one santri his user ( sudah )
         //psb
         Route::prefix('psb')->group(function () {
-            Route::post('/santri', [SantriController::class, 'create']); //( belum )
         });
         //security
         Route::prefix('sec')->group(function () {
             Route::get('/permits', [SecActsPermitsController::class, 'index']); //( sudah )
-            Route::post('/permits/{id}', [SecActsPermitsController::class, 'create']); //( sudah )
+            Route::post('/permits', [SecActsPermitsController::class, 'create']); //( sudah )
             Route::get('/permits/{id}', [SecActsPermitsController::class, 'show']); //( sudah )
             Route::put('/permits/{id}', [SecActsPermitsController::class, 'update']); //( sudah )
             Route::delete('/permits/{id}', [SecActsPermitsController::class, 'destroy']); //( sudah )

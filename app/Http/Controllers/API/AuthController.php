@@ -13,22 +13,22 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
+            'nis_santri' => 'required|string',
             'password' => 'required|string'
         ]);
 
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('nis_santri', $request->nis_santri)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'username' => ['The provided credentials are incorrect.'],
+                'nis_santri' => ['The provided credentials are incorrect.'],
             ]);
         }
 
         $token = $user->createToken('sipontoken')->plainTextToken;
 
         $response = [
-            'user_id' => $user->id,
+            'nis' => $user->nis_santri,
             'token' => $token
         ];
 

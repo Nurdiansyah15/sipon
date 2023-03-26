@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -81,27 +82,45 @@ class DatabaseSeeder extends Seeder
         //     'disabled' => false
         // ]);
 
-
+        // \App\Models\Santri::factory()->create([
+        //     'nis' => '1000123000',
+        //     'fullname' => 'Nurdiansyah',
+        //     'program' => 'Kitab',
+        //     'option' => '1',
+        //     'status' => '1',
+        //     'sbc' => '1',
+        //     'joined_at' => Carbon::now()->toDateTimeString(),
+        // ]);
 
         // \App\Models\User::factory()->create([
-        //     'username' => 'nurdiansyah',
-        //     'password' => bcrypt('nurdiansyah')
+        //     'nis_santri' => '1000123000',
+        //     'password' => bcrypt('1000123000')
         // ]);
 
         // \App\Models\RoleUser::factory()->create([
         //     "user_id" => 1,
         //     "role_id" => 2 //default santri
         // ]);
+
+        // \App\Models\Santri::factory()->create([
+        //     'nis' => '1000223000',
+        //     'fullname' => 'Santika Hamilah',
+        //     'program' => 'Kitab',
+        //     'option' => '2',
+        //     'status' => '1',
+        //     'sbc' => '1',
+        //     'joined_at' => Carbon::now()->toDateTimeString(),
+        // ]);
+
         // \App\Models\User::factory()->create([
-        //     'username' => 'santika',
-        //     'password' => bcrypt('santika')
+        //     'nis_santri' => '1000223000',
+        //     'password' => bcrypt('1000223000')
         // ]);
 
         // \App\Models\RoleUser::factory()->create([
         //     "user_id" => 2,
         //     "role_id" => 2 //default santri
         // ]);
-
 
         \App\Models\Security\SecActs::factory()->create([
             'name' => "Madrasah Diniyyah"

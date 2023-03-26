@@ -37,12 +37,12 @@ class UserController extends Controller
     {
         try {
             $fields = $request->validate([
-                'username' => 'required|string|unique:users,username',
+                'nis_santri' => 'required|string',
                 'password' => 'required|string'
             ]);
 
             $user = User::create([
-                'username' => $fields['username'],
+                'nis_santri' => $fields['nis_santri'],
                 'password' => bcrypt($fields['password'])
             ]);
 
@@ -80,9 +80,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nis_santri)
     {
-        $user = User::where('id', $id)->with('roles')->first();
+        $user = User::where('nis_santri', $nis_santri)->with('roles')->first();
         if ($user !== null) {
             return ApiFormatter::createApi(200, 'Success', $user);
         } else {
@@ -96,7 +96,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($nis)
+    public function edit($nis_santri)
     {
         //
     }
@@ -108,21 +108,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $nis_santri)
     {
         try {
-            $request->validate([
-                'username' => 'string',
+            $fields = $request->validate([
+                'nis_santri' => 'string',
             ]);
 
-
-            $user = User::findOrFail($id);
-
-            $user->update([
-                'username' => (isset($request->username)) ? $request->username : $user->username
+            User::where('nis_santri', $nis_santri)->update([
+                $fields
             ]);
 
-            $data = User::where('id', $user->id)->first();
+            $data = User::where('nis_santri', $nis_santri)->first();
 
             if ($data) {
                 return ApiFormatter::createApi(201, 'Created', $data);
@@ -142,12 +139,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::where('id', $id)->first();
-        if ($user) {
-            $user->delete();
-            return ApiFormatter::createApi(200, 'Success destroy data');
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
+        //automatic delete after delete santri reference
     }
 }

@@ -29,7 +29,8 @@
 
                             <div class="input-box">
                                 <label for="">NIS</label>
-                                <input class="" name="username" value="{{ old('username') }}" type="text" required>
+                                <input class="" name="nis_santri" value="{{ old('nis_santri') }}" type="text"
+                                    required>
                             </div>
                             <div class="input-box">
                                 <label for="">Password</label>

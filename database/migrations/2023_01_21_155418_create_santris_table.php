@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('santris', function (Blueprint $table) {
             $table->primary('nis');
-            $table->string('nis', 50)->constrained()->required();
+            $table->string('nis', 50)->unique()->required();
 
-            $table->unsignedBigInteger('user_id')->constrained()->required();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            // $table->unsignedBigInteger('user_id')->constrained()->required();
+            // $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->string('nickname', 20)->nullable();
             $table->string('email', 100)->nullable()->unique();

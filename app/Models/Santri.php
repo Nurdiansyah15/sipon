@@ -12,6 +12,8 @@ class Santri extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'santris';
+    protected $primaryKey = 'nis';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +26,6 @@ class Santri extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class, "id", "user_id");
+        return $this->hasOne(User::class, "nis_santri", "nis");
     }
 }

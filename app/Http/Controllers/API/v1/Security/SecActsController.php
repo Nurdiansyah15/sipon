@@ -74,7 +74,7 @@ class SecActsController extends Controller
         if ($data) {
             return ApiFormatter::createApi(200, 'Success', $data);
         } else {
-            return ApiFormatter::createApi(400, 'Bad request');
+            return ApiFormatter::createApi(400, 'Bad request activity not found');
         }
     }
 

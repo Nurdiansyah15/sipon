@@ -48,6 +48,6 @@ class User extends Authenticatable
     }
     public function santri()
     {
-        return $this->hasOne(Santri::class, "nis", "nis");
+        return $this->hasOne(Santri::class, "nis", "nis_santri");
     }
 }
