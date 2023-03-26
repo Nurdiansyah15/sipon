@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Santri;
 use App\Models\RoleUser;
@@ -74,7 +75,6 @@ class SantriController extends Controller
             'fullname' => 'string|required',
             'program' => 'string|required',
             'option' => 'string|required',
-            'joined_at' => 'date|required',
         ]);
 
 
@@ -86,6 +86,7 @@ class SantriController extends Controller
             $fields['user_id'] = $user->id;
             $fields['status'] = '1';
             $fields['sbc'] = '1';
+            $fields['joined_at'] = Carbon::now()->toDateTimeString();
 
             $santri = Santri::create($fields);
 
@@ -112,6 +113,7 @@ class SantriController extends Controller
             $fields['user_id'] = $newUser->id;
             $fields['status'] = '1';
             $fields['sbc'] = '1';
+            $fields['joined_at'] = Carbon::now()->toDateTimeString();
 
             $santri = Santri::create($fields);
 
