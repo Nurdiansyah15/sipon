@@ -21,13 +21,13 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->string('nickname', 20)->nullable();
-            $table->string('email', 20)->nullable()->unique();
+            $table->string('email', 100)->nullable()->unique();
             $table->string('fullname', 100)->nullable();
             $table->string('hobby', 20)->nullable();
             $table->string('purpose', 20)->nullable();
             $table->string('workplace', 50)->nullable();
             $table->string('department', 50)->nullable();
-            $table->boolean('status', 1)->nullable();
+            $table->string('status', 1)->nullable();
             $table->string('sbc')->nullable();
             $table->string('blood', 1)->nullable();
             $table->date('dob')->nullable();

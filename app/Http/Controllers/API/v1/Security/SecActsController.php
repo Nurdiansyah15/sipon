@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\API\v1;
+namespace App\Http\Controllers\API\v1\Security;
 
-use Exception;
-use App\Models\User;
-use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use App\Helpers\ApiFormatter;
+use App\Models\Security\SecActs;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 
-class UserController extends Controller
+class SecActsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $data = SecActs::all();
 
-        if ($users) {
-            return ApiFormatter::createApi(200, 'Success', $users);
+        if ($data) {
+            return ApiFormatter::createApi(200, 'Success', $data);
         } else {
             return ApiFormatter::createApi(400, 'Failed');
         }
@@ -37,21 +35,10 @@ class UserController extends Controller
     {
         try {
             $fields = $request->validate([
-                'username' => 'required|string|unique:users,username',
-                'password' => 'required|string'
+                'name' => 'string|required',
             ]);
 
-            $user = User::create([
-                'username' => $fields['username'],
-                'password' => bcrypt($fields['password'])
-            ]);
-
-            RoleUser::create([
-                "user_id" => $user->id,
-                "role_id" => 2 //default santri
-            ]);
-
-            $data = User::where('id', $user->id)->first();
+            $data = SecActs::create($fields);
 
             if ($data) {
                 return ApiFormatter::createApi(201, 'Created', $data);
@@ -82,21 +69,22 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('id', $id)->with('roles')->first();
-        if ($user !== null) {
-            return ApiFormatter::createApi(200, 'Success', $user);
+        $data = SecActs::where('id', $id)->first();
+
+        if ($data) {
+            return ApiFormatter::createApi(200, 'Success', $data);
         } else {
-            return ApiFormatter::createApi(404, 'User is not found');
+            return ApiFormatter::createApi(400, 'Bad request');
         }
     }
 
     /**
-     * Show the form for editing the specified resource.    
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($nis)
+    public function edit($id)
     {
         //
     }
@@ -111,23 +99,17 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $request->validate([
-                'username' => 'string',
+            $fields = $request->validate([
+                'name' => 'string',
             ]);
 
-
-            $user = User::findOrFail($id);
-
-            $user->update([
-                'username' => (isset($request->username)) ? $request->username : $user->username
-            ]);
-
-            $data = User::where('id', $user->id)->first();
+            SecActs::where('id', $id)->update($fields);
+            $data = SecActs::where('id', $id)->first();
 
             if ($data) {
-                return ApiFormatter::createApi(201, 'Created', $data);
+                return ApiFormatter::createApi(201, 'Updated', $data);
             } else {
-                return ApiFormatter::createApi(400, 'Bad request');
+                return ApiFormatter::createApi(400, 'Failed');
             }
         } catch (ValidationException $error) {
             return ApiFormatter::createApi(400, $error->errors());
@@ -142,9 +124,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::where('id', $id)->first();
-        if ($user) {
-            $user->delete();
+        $data = SecActs::where('id', $id)->first();
+        if ($data) {
+            $data->delete();
             return ApiFormatter::createApi(200, 'Success destroy data');
         } else {
             return ApiFormatter::createApi(400, 'Failed');

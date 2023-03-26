@@ -1,4 +1,4 @@
-@extends('web.template.master-dashboard')
+@extends('web.template.master')
 @section('content')
     {{-- content --}}
     <div class="content">
@@ -16,73 +16,26 @@
                             <h2>Layanan</h2>
                         </div>
                         <div class="group-service row mx-5 my-5">
-                            {{-- https://santri.kyaigalangsewu.net --}}
-                            <a class="btn item-service text-center" target="_blank"
-                                href="http://127.0.0.1:8000?data={{ $data }}">
+                            <a class="btn item-service text-center" href="/super_admin">
                                 <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-users fa-3x"></i>
+                                    <i class="fa-solid fa-user-plus fa-3x"></i>
                                 </div>
                                 <div class="title-item-service">
-                                    <h4>Kesantrian</h4>
+                                    <h4>Super Admin</h4>
                                 </div>
                             </a>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-file fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Perizinan</h4>
-                                </div>
-                            </div>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-graduation-cap fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Akademik</h4>
-                                </div>
-                            </div>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-shop fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Angkringan</h4>
-                                </div>
-                            </div>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-notes-medical fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Puskestren</h4>
-                                </div>
-                            </div>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-money-bill fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Keuangan</h4>
-                                </div>
-                            </div>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-solid fa-user-graduate fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Pendaftaran Santri Baru</h4>
-                                </div>
-                            </div>
-                            <div class="btn item-service text-center">
-                                <div class="icon mb-3 mt-4">
-                                    <i class="fa-regular fa-file fa-3x"></i>
-                                </div>
-                                <div class="title-item-service">
-                                    <h4>Administrasi</h4>
-                                </div>
-                            </div>
-
+                            @foreach ($menu as $item)
+                                {{-- https://santri.kyaigalangsewu.net --}}
+                                <a class="btn item-service text-center" target="_blank"
+                                    href="http://127.0.0.1:8200?data={{ $data }}">
+                                    <div class="icon mb-3 mt-4">
+                                        <i class="{{ $item->icon }} fa-3x"></i>
+                                    </div>
+                                    <div class="title-item-service">
+                                        <h4>{{ $item->menu_name }}</h4>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

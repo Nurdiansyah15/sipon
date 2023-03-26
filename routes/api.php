@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\v1\UserController;
 use App\Http\Controllers\API\v1\SantriController;
-
+use App\Http\Controllers\API\v1\Security\SecActsController;
+use App\Http\Controllers\API\v1\Security\SecActsPermitsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,17 +36,36 @@ Route::prefix('v1')->group(function () {
             return response('Valid', 200); // sudah
         });
 
-        //user
+        //user 
         Route::get('/user', [UserController::class, 'index']); //get all user ( sudah )
-        Route::post('/user', [UserController::class, 'create']); //cretae one user ( sudah )
+        // Route::post('/user', [UserController::class, 'create']); //cretae one user ( sudah )
         Route::get('/user/{id}', [UserController::class, 'show']); //get one user with id  ( sudah )
         Route::put('/user/{id}', [UserController::class, 'update']); //update one user with id ( sudah )
         Route::delete('/user/{id}', [UserController::class, 'destroy']); //destroy one user with id ( sudah )
         //santri
         Route::get('/santri', [SantriController::class, 'index']); // ( sudah )
-        Route::post('/santri', [SantriController::class, 'create']); //( sudah )
+        Route::get('/santri/pa', [SantriController::class, 'boys']); // ( sudah )
+        Route::get('/santri/pi', [SantriController::class, 'girls']); // ( sudah )
+        Route::post('/santri', [SantriController::class, 'create']); //( sudah ) data required username
         Route::get('/santri/{nis}', [SantriController::class, 'show']); //(sudah)
         Route::put('/santri/{nis}', [SantriController::class, 'update']); // ( sudah )
+        //psb
+        Route::prefix('psb')->group(function () {
+            Route::post('/santri', [SantriController::class, 'create']); //( belum )
+        });
+        //security
+        Route::prefix('sec')->group(function () {
+            Route::get('/permits', [SecActsPermitsController::class, 'index']); //( sudah )
+            Route::post('/permits/{id}', [SecActsPermitsController::class, 'create']); //( sudah )
+            Route::get('/permits/{id}', [SecActsPermitsController::class, 'show']); //( sudah )
+            Route::put('/permits/{id}', [SecActsPermitsController::class, 'update']); //( sudah )
+            Route::delete('/permits/{id}', [SecActsPermitsController::class, 'destroy']); //( sudah )
+            Route::get('/acts', [SecActsController::class, 'index']); //( sudah )
+            Route::post('/acts', [SecActsController::class, 'create']); //( sudah )
+            Route::get('/acts/{id}', [SecActsController::class, 'show']); //( sudah )
+            Route::put('/acts/{id}', [SecActsController::class, 'update']); //( sudah )
+            Route::delete('/acts/{id}', [SecActsController::class, 'destroy']); //( sudah )
+        });
     });
 });
 

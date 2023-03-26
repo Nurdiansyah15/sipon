@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('sec_acts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('menu_name')->nullable();
-            $table->string('url')->nullable();
-            $table->string('icon')->nullable();
-            $table->boolean('disabled')->nullable();
+            $table->string('name', 50);
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('sec_acts');
     }
 };

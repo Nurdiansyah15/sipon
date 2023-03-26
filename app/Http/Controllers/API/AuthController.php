@@ -13,22 +13,22 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'nis' => 'required|string',
+            'username' => 'required|string',
             'password' => 'required|string'
         ]);
 
-        $user = User::where('nis', $request->nis)->first();
+        $user = User::where('username', $request->username)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'nis' => ['The provided credentials are incorrect.'],
+                'username' => ['The provided credentials are incorrect.'],
             ]);
         }
 
         $token = $user->createToken('sipontoken')->plainTextToken;
 
         $response = [
-            'nis' => $user,
+            'user_id' => $user->id,
             'token' => $token
         ];
 
@@ -38,10 +38,10 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->validate([
-            'nis' => 'required|string',
+            'id' => 'required|string',
         ]);
 
-        $user = User::where('nis', $request->nis)->first();
+        $user = User::where('id', $request->id)->first();
 
         $user->tokens()->delete();
 

@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Security;
 
+use App\Models\Santri;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Santri extends Model
+class SecActsPermits extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'santris';
+    protected $table = 'sec_acts_permits';
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +20,15 @@ class Santri extends Model
      * @var array<int, string>
      */
     protected $guarded = [
-        ''
+        'id'
     ];
 
-    public function user()
+    public function santri()
     {
-        return $this->hasOne(User::class, "id", "user_id");
+        return $this->hasOne(Santri::class, "nis", "nis");
+    }
+    public function activity()
+    {
+        return $this->hasOne(SecActs::class, "id", "sec_acts_id");
     }
 }

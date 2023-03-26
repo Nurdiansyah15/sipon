@@ -17,17 +17,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'nis' => 'required|string',
+            'username' => 'required|string',
             'password' => 'required|string'
         ]);
-
+        // dd($credentials);
         if (Auth::attempt($credentials)) {
 
-            $user = User::where('nis', $credentials['nis'])->first();
+            $user = User::where('username', $credentials['username'])->first();
             $token = $request->user()->createToken('sipontoken')->plainTextToken;
 
             $data = [
-                'nis' => $user->nis,
+                'user_id' => $user->id,
                 'token' => $token
             ];
 
@@ -42,6 +42,11 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
+
+        Auth::user()->tokens->each(function ($token) {
+            $token->delete();
+        });
+
         Auth::logout();
 
         $request->session()->invalidate();

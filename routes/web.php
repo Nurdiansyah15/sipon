@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WEB\AdministratorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\AuthController;
 use App\Http\Controllers\WEB\DashboardController;
@@ -21,5 +22,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/super_admin', [AdministratorController::class, 'index']);
+
+
     Route::get('/logout', [AuthController::class, 'logout']);
 });
