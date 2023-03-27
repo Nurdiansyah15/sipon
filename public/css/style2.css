@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    font-family: Montserrat;
+}
+
+body {
+    background-color: #f9f9f9;
+}
+
+.container {
+    background-color: #f9f9f9;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+.navbar {
+    width: 90%;
+    margin: auto;
+}
+
+.footer {
+    background-color: #114f5a;
+    border-radius: 5px;
+    padding: 5px;
+    padding-top: 20px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.btn-long {
+    background-color: #114f5a;
+    border-radius: 20px;
+    width: 100px;
+    color: #fff;
+}
+.btn-long:hover {
+    background-color: #c49450;
+    border-radius: 20px;
+    width: 100px;
+    color: #fff;
+}
+
+.btn-circle {
+    background-color: #114f5a;
+    border-radius: 100%;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+.btn-circle:hover {
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    background-color: #c49450;
+    border-radius: 100%;
+    color: #fff;
+}
+.my-shape {
+    border-radius: 15px;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+}

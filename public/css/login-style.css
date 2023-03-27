@@ -111,4 +111,47 @@
         font-size: 14px;
         font-weight: 300;
     }
+
+    /* navbar */
+    .navbar-brand img {
+        width: 130px;
+    }
+    /* navbar */
+
+    .btn-long {
+        background-color: #114f5a;
+        border-radius: 20px;
+        width: 80px;
+        font-size: 10px;
+        color: #fff;
+    }
+    .btn-long:hover {
+        background-color: #c49450;
+        border-radius: 20px;
+        width: 80px;
+        font-size: 10px;
+        color: #fff;
+    }
+
+    .btn-circle {
+        background-color: #114f5a;
+        border-radius: 100%;
+        color: #fff;
+        width: 27px;
+        height: 27px;
+        font-size: 10px;
+        align-items: center;
+    }
+    .btn-circle:hover {
+        width: 27px;
+        height: 27px;
+        font-size: 10px;
+        align-items: center;
+        background-color: #c49450;
+        border-radius: 100%;
+        color: #fff;
+    }
+    .footer {
+        visibility: hidden;
+    }
 }

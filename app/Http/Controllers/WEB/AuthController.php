@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return view('web.login');
+        return view('web.login2');
     }
     public function login(Request $request)
     {
