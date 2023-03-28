@@ -39,15 +39,17 @@ class RegisterController extends Controller
             $fields = $request->validate([
                 'no_regis' => 'string',
                 'fullname' => 'string|required',
-                'nik' => 'string|required',
-                'phone' => 'string|required',
-                'email' => 'string|email:rfc,dns|required',
+                'nik' => 'string|required|unique:registers,nik',
+                'phone' => 'string|required|unique:registers,nik',
+                'email' => 'string|email:rfc,dns|required|unique:registers,nik',
                 'program' => 'string|required',
                 'option' => 'string|required',
                 'id_setting' => 'integer|required',
+                'password' => 'string|required'
             ]);
 
             $fields['no_regis'] = RegNumGenerator::get();
+            $fields['password'] = bcrypt($fields['password']);
 
             $data = Register::create($fields);
 
@@ -113,6 +115,7 @@ class RegisterController extends Controller
             $fields = $request->validate([
                 'fullname' => 'string',
                 'email' => 'string|email:rfc,dns',
+                'password' => 'string',
                 'program' => 'string',
                 'option' => 'string',
                 'nickname' => 'string',

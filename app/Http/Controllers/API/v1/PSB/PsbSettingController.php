@@ -181,7 +181,7 @@ class PsbSettingController extends Controller
     public function disableAll()
     {
 
-        $setting = PsbSetting::update([
+        $setting = PsbSetting::where('status', '1')->update([
             'status' => '0'
         ]);
 
