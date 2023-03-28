@@ -14,8 +14,13 @@ class RegNumGenerator
         $prefixnum = 'P1000' . $year; //p100023000
 
         if ($last !== null) {
+            $numYear = substr($last->no_regis, 5, 2);
+            if ($numYear > $year) {
+                $lastNum = 0;
+            } else {
+                $lastNum = substr($last->no_regis, 7, 3);
+            }
 
-            $lastNum = substr($last->no_regis, 7, 3);
             $newLastNum = (int)$lastNum + 1;
             $newRegNum = $prefixnum . str_pad((string)$newLastNum, 3, "0", STR_PAD_LEFT);
         } else {

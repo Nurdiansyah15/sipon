@@ -15,7 +15,13 @@ class NisGenerator
 
         if ($last !== null) {
 
-            $lastNum = substr($last->nis, 7, 3);
+            $numYear = substr($last->nis, 5, 2);
+            if ($numYear > $year) {
+                $lastNum = 0;
+            } else {
+                $lastNum = substr($last->nis, 7, 3);
+            }
+
             $newLastNum = (int)$lastNum + 1;
             $newNis = $prefixnis . str_pad((string)$newLastNum, 3, "0", STR_PAD_LEFT);
         } else {
