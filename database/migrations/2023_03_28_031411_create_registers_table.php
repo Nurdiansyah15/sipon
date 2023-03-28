@@ -15,11 +15,19 @@ return new class extends Migration
     {
         Schema::create('registers', function (Blueprint $table) {
             $table->id();
-            $table->string('no_regis', 50)->unique();
+            $table->string('no_regis', 50)->unique()->required();
+            $table->string('password', 255)->required();
+            $table->string('fullname', 100)->required();
+            $table->string('email', 100)->required();
+            $table->string('program', 20)->required();
+            $table->string('option', 1)->required();
+            $table->string('nik', 20)->required();
+            $table->string('phone', 15)->required();
 
-            $table->string('fullname', 100)->nullable();
+            $table->unsignedBigInteger('setting_id')->constrained()->required();
+            $table->foreign('setting_id')->references('id')->on('psb_settings');
+
             $table->string('nickname', 20)->nullable();
-            $table->string('email', 100)->nullable();
             $table->string('hobby', 20)->nullable();
             $table->string('purpose', 20)->nullable();
             $table->string('workplace', 50)->nullable();
@@ -29,10 +37,8 @@ return new class extends Migration
             $table->string('blood', 1)->nullable();
             $table->date('dob')->nullable();
             $table->string('pob', 30)->nullable();
-            $table->string('program', 20)->nullable();
             $table->string('grade_id', 2)->nullable();
             $table->string('room_id', 2)->nullable();
-            $table->string('phone', 15)->nullable();
             $table->text('address', 100)->nullable();
             $table->string('district', 30)->nullable();
             $table->string('sub_district', 30)->nullable();
@@ -43,7 +49,6 @@ return new class extends Migration
             $table->string('no_pkh', 10)->nullable();
             $table->string('no_kks', 20)->nullable();
             $table->string('home_status', 50)->nullable();
-            $table->string('nik', 20)->nullable();
             $table->string('no_kk', 20)->nullable();
             $table->string('father', 100)->nullable();
             $table->string('father_pn', 15)->nullable();
@@ -65,7 +70,6 @@ return new class extends Migration
             $table->string('guardian_income', 20)->nullable();
             $table->string('path_photo', 100)->nullable();
 
-            $table->string('option', 1)->nullable();
             $table->date('joined_at')->nullable();
             $table->timestamps();
         });

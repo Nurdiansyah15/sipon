@@ -39,9 +39,12 @@ class RegisterController extends Controller
             $fields = $request->validate([
                 'no_regis' => 'string',
                 'fullname' => 'string|required',
+                'nik' => 'string|required',
+                'phone' => 'string|required',
                 'email' => 'string|email:rfc,dns|required',
                 'program' => 'string|required',
                 'option' => 'string|required',
+                'id_setting' => 'integer|required',
             ]);
 
             $fields['no_regis'] = RegNumGenerator::get();

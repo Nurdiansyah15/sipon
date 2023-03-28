@@ -154,4 +154,37 @@ class PsbSettingController extends Controller
             return ApiFormatter::createApi(400, 'Failed');
         }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function active()
+    {
+        $setting = PsbSetting::where('status', '1')->first();
+
+        if ($setting != null) {
+            return ApiFormatter::createApi(200, 'Success', $setting);
+        } else {
+            return ApiFormatter::createApi(400, 'Bad request, santri not found');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function disableAll()
+    {
+
+        $setting = PsbSetting::update([
+            'status' => '0'
+        ]);
+
+        return ApiFormatter::createApi(200, 'Success');
+    }
 }

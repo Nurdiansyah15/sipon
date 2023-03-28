@@ -41,6 +41,8 @@ Route::prefix('v1')->group(function () {
             Route::post('/register', [RegisterController::class, 'create']); //( sudah )
             Route::put('/register/{id}', [RegisterController::class, 'update']); //( sudah )
             Route::get('/setting/{id}', [PsbSettingController::class, 'show']); //( sudah )
+            Route::get('/setting/active', [PsbSettingController::class, 'active']); //( sudah )
+            Route::get('/setting/disableAll', [PsbSettingController::class, 'disableAll']); //( sudah )
         });
     });
     Route::middleware('auth:sanctum')->group(function () {
