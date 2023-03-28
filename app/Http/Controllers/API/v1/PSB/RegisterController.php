@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\API\v1;
+namespace App\Http\Controllers\API\v1\PSB;
 
-use Exception;
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Santri;
-use App\Models\RoleUser;
+use App\Models\PSB\Register;
 use Illuminate\Http\Request;
 use App\Helpers\ApiFormatter;
-use App\Helpers\NisGenerator;
+use App\Helpers\RegNumGenerator;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class SantriController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,40 +19,10 @@ class SantriController extends Controller
     public function index()
     {
         // pa 10001 pi 10002
-        $santris = Santri::all();
+        $registers = Register::all();
 
-        if ($santris) {
-            return ApiFormatter::createApi(200, 'Success', $santris);
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function boys()
-    {
-        $santris = Santri::where('option', '1')->get();
-
-        if ($santris) {
-            return ApiFormatter::createApi(200, 'Success', $santris);
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function girls()
-    {
-        $santris = Santri::where('option', '2')->get();
-
-        if ($santris) {
-            return ApiFormatter::createApi(200, 'Success', $santris);
+        if ($registers) {
+            return ApiFormatter::createApi(200, 'Success', $registers);
         } else {
             return ApiFormatter::createApi(400, 'Failed');
         }
@@ -72,34 +37,16 @@ class SantriController extends Controller
     {
         try {
             $fields = $request->validate([
-                'nis' => 'string',
+                'no_regis' => 'string',
                 'fullname' => 'string|required',
-                'nickname' => 'string|required',
                 'email' => 'string|email:rfc,dns|required',
                 'program' => 'string|required',
                 'option' => 'string|required',
             ]);
 
-            if (!isset($fields['nis'])) {
-                $fields['nis'] = NisGenerator::get($fields['option']);
-            }
-            $fields['status'] = '1';
-            $fields['sbc'] = '1';
-            $fields['joined_at'] = Carbon::now()->toDateTimeString();
+            $fields['no_regis'] = RegNumGenerator::get();
 
-            $santri = Santri::create($fields);
-
-            $newUser = User::create([
-                'nis_santri' => $fields['nis'],
-                'password' => bcrypt($fields['nis'])
-            ]);
-
-            RoleUser::create([
-                "user_id" => $newUser->id,
-                "role_id" => 2 //default santri
-            ]);
-
-            $data = Santri::where('nis', $santri->nis)->with('user')->first();
+            $data = Register::create($fields);
 
             if ($data) {
                 return ApiFormatter::createApi(201, 'Success', $data);
@@ -128,12 +75,12 @@ class SantriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nis)
+    public function show($id)
     {
-        $santri = Santri::where('nis', $nis)->first();
+        $register = Register::where('id', $id)->first();
 
-        if ($santri != null) {
-            return ApiFormatter::createApi(200, 'Success', $santri);
+        if ($register != null) {
+            return ApiFormatter::createApi(200, 'Success', $register);
         } else {
             return ApiFormatter::createApi(400, 'Bad request, santri not found');
         }
@@ -157,23 +104,24 @@ class SantriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $nis) //belum jadi
+    public function update(Request $request, $id)
     {
         try {
             $fields = $request->validate([
-                'nickname' => 'string',
-                'email' => 'email:rfc,dns',
                 'fullname' => 'string',
+                'email' => 'string|email:rfc,dns',
+                'program' => 'string',
+                'option' => 'string',
+                'nickname' => 'string',
                 'hobby' => 'string',
                 'purpose' => 'string',
                 'workplace' => 'string',
                 'department' => 'string',
-                'status' => 'boolean',
+                'status' => 'string',
                 'sbc' => 'string',
                 'blood' => 'string',
                 'dob' => 'date',
                 'pob' => 'string',
-                'program' => 'string',
                 'grade_id' => 'string',
                 'room_id' => 'string',
                 'phone' => 'string',
@@ -208,18 +156,16 @@ class SantriController extends Controller
                 'guardian_graduate' => 'string',
                 'guardian_income' => 'string',
                 'path_photo' => 'string',
-                'option' => 'string',
             ]);
 
-            Santri::where('nis', $nis)->update($fields);
+            Register::where('id', $id)->update($fields);
 
-            $data = Santri::where('nis', $nis)->first();
-
+            $data = Register::where('id', $id)->first();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(201, 'Success', $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(500, 'Failed');
             }
         } catch (ValidationException $error) {
             return ApiFormatter::createApi(400, $error->errors());
@@ -232,11 +178,11 @@ class SantriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($nis)
+    public function destroy($id)
     {
-        $santri = Santri::where('nis', $nis)->first();
-        if ($santri) {
-            $santri->delete();
+        $register = Register::where('id', $id)->first();
+        if ($register) {
+            $register->delete();
             return ApiFormatter::createApi(200, 'Success destroy data');
         } else {
             return ApiFormatter::createApi(400, 'Failed');

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\v1\PSB\PsbSettingController;
+use App\Http\Controllers\API\v1\PSB\RegisterController;
 use App\Http\Controllers\API\v1\UserController;
 use App\Http\Controllers\API\v1\SantriController;
 use App\Http\Controllers\API\v1\Security\SecActsController;
@@ -29,7 +31,18 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 
+
+
 Route::prefix('v1')->group(function () {
+    Route::middleware(['api_key'])->group(function () {
+        //psb
+        Route::prefix('psb')->group(function () {
+            Route::get('/register', [RegisterController::class, 'index']); //( sudah )
+            Route::post('/register', [RegisterController::class, 'create']); //( sudah )
+            Route::put('/register/{id}', [RegisterController::class, 'update']); //( sudah )
+            Route::get('/setting/{id}', [PsbSettingController::class, 'show']); //( sudah )
+        });
+    });
     Route::middleware('auth:sanctum')->group(function () {
         //token check
         Route::get('/token', function () {
@@ -51,6 +64,12 @@ Route::prefix('v1')->group(function () {
         Route::delete('/santri/{nis}', [SantriController::class, 'destroy']); //destroy one santri his user ( sudah )
         //psb
         Route::prefix('psb')->group(function () {
+            Route::get('/register/{id}', [RegisterController::class, 'show']); //( sudah )
+            Route::delete('/register/{id}', [RegisterController::class, 'destroy']); //( sudah )
+            Route::get('/setting', [PsbSettingController::class, 'index']); //( sudah )
+            Route::post('/setting', [PsbSettingController::class, 'create']); //( sudah )
+            Route::put('/setting/{id}', [PsbSettingController::class, 'update']); //( sudah )
+            Route::delete('/setting/{id}', [PsbSettingController::class, 'destroy']); //( sudah )
         });
         //security
         Route::prefix('sec')->group(function () {

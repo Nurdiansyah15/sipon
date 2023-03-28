@@ -38,10 +38,10 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->validate([
-            'id' => 'required|string',
+            'nis_santri' => 'required|string',
         ]);
 
-        $user = User::where('id', $request->id)->first();
+        $user = User::where('nis_santri', $request->nis_santri)->first();
 
         $user->tokens()->delete();
 
