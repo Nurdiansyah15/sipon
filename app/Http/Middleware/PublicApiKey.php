@@ -18,7 +18,7 @@ class PublicApiKey
     {
         $apiKey = $request->header('X-API-KEY');
 
-        if (!$apiKey || !config('app.api_key')) {
+        if (!$apiKey || $apiKey != config('app.api_key')) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return $next($request);
