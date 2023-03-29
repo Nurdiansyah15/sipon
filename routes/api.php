@@ -67,7 +67,6 @@ Route::prefix('v1')->group(function () {
         Route::delete('/santri/{nis}', [SantriController::class, 'destroy']); //destroy one santri his user ( sudah )
         //psb
         Route::prefix('psb')->group(function () {
-            Route::get('/register/{id}', [RegisterController::class, 'show']); //( sudah )
             Route::delete('/register/{id}', [RegisterController::class, 'destroy']); //( sudah )
             Route::get('/setting', [PsbSettingController::class, 'index']); //( sudah )
             Route::post('/setting', [PsbSettingController::class, 'create']); //( sudah )
