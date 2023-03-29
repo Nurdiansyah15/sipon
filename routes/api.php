@@ -38,6 +38,7 @@ Route::prefix('v1')->group(function () {
         //psb
         Route::prefix('psb')->group(function () {
             Route::get('/register', [RegisterController::class, 'index']); //( sudah )
+            Route::get('/register/{id}', [RegisterController::class, 'show']); //( sudah )
             Route::post('/register', [RegisterController::class, 'create']); //( sudah )
             Route::put('/register/{id}', [RegisterController::class, 'update']); //( sudah )
             Route::get('/setting/{id}', [PsbSettingController::class, 'show']); //( sudah )

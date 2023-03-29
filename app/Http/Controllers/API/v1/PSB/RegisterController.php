@@ -44,7 +44,7 @@ class RegisterController extends Controller
                 'email' => 'string|email:rfc,dns|required|unique:registers,nik',
                 'program' => 'string|required',
                 'option' => 'string|required',
-                'id_setting' => 'integer|required',
+                'setting_id' => 'integer|required',
                 'password' => 'string|required'
             ]);
 
