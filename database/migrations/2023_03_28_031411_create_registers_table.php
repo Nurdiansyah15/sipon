@@ -30,11 +30,12 @@ return new class extends Migration
             $table->string('nickname', 20)->nullable();
             $table->string('hobby', 20)->nullable();
             $table->string('purpose', 20)->nullable();
+            $table->string('motivation_entry', 20)->nullable();
             $table->string('workplace', 50)->nullable();
             $table->string('department', 50)->nullable();
             $table->string('status', 1)->nullable();
             $table->string('sbc')->nullable();
-            $table->string('blood', 1)->nullable();
+            $table->string('blood', 3)->nullable();
             $table->date('dob')->nullable();
             $table->string('pob', 30)->nullable();
             $table->string('grade_id', 2)->nullable();
@@ -68,6 +69,7 @@ return new class extends Migration
             $table->string('guardian_job', 50)->nullable();
             $table->string('guardian_graduate', 50)->nullable();
             $table->string('guardian_income', 20)->nullable();
+            $table->string('guardian_relationship', 20)->nullable();
             $table->string('path_photo', 100)->nullable();
             $table->string('path_bill', 100)->nullable();
             $table->string('path_doc', 100)->nullable();

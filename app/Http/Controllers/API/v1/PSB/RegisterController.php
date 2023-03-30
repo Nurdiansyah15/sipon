@@ -50,6 +50,7 @@ class RegisterController extends Controller
 
             $fields['no_regis'] = RegNumGenerator::get();
             $fields['password'] = bcrypt($fields['password']);
+            $fields['status'] = '0';
 
             $data = Register::create($fields);
 
@@ -121,6 +122,7 @@ class RegisterController extends Controller
                 'nickname' => 'string|nullable',
                 'hobby' => 'string|nullable',
                 'purpose' => 'string|nullable',
+                'motivation_entry' => 'string|nullable',
                 'workplace' => 'string|nullable',
                 'department' => 'string|nullable',
                 'status' => 'string|nullable',
@@ -161,6 +163,7 @@ class RegisterController extends Controller
                 'guardian_job' => 'string|nullable',
                 'guardian_graduate' => 'string|nullable',
                 'guardian_income' => 'string|nullable',
+                'guardian_relationship' => 'string|nullable',
                 'path_photo' => 'string|nullable',
                 'path_bill' => 'string|nullable',
                 'path_doc' => 'string|nullable',
