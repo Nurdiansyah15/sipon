@@ -70,9 +70,12 @@ return new class extends Migration
             $table->string('guardian_graduate', 50)->nullable();
             $table->string('guardian_income', 20)->nullable();
             $table->string('guardian_relationship', 20)->nullable();
+            $table->string('previous_pondok_name', 100)->nullable();
+            $table->string('previous_pondok_address', 100)->nullable();
             $table->string('path_photo', 100)->nullable();
             $table->string('path_bill', 100)->nullable();
             $table->string('path_doc', 100)->nullable();
+            $table->string('path_mutasi_emis', 100)->nullable();
 
             $table->date('joined_at')->nullable();
             $table->timestamps();

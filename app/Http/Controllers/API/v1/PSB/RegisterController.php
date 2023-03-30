@@ -164,9 +164,12 @@ class RegisterController extends Controller
                 'guardian_graduate' => 'string|nullable',
                 'guardian_income' => 'string|nullable',
                 'guardian_relationship' => 'string|nullable',
+                'previous_pondok_name' => 'string|nullable',
+                'previous_pondok_address' => 'string|nullable',
                 'path_photo' => 'string|nullable',
                 'path_bill' => 'string|nullable',
                 'path_doc' => 'string|nullable',
+                'path_mutasi_emis' => 'string|nullable',
             ]);
 
             Register::where('id', $id)->update($fields);
