@@ -24,6 +24,15 @@
                                     <h4>Super Admin</h4>
                                 </div>
                             </a>
+                            <a class="btn item-service text-center" target="_blank"
+                                href="http://127.0.0.1:8300/admin?data={{ $data }}">
+                                <div class="icon mb-3 mt-4">
+                                    <i class="fa-solid fa-user-graduate fa-3x"></i>
+                                </div>
+                                <div class="title-item-service">
+                                    <h4>Penerimaan Santri Baru</h4>
+                                </div>
+                            </a>
                             @foreach ($menu as $item)
                                 {{-- https://santri.kyaigalangsewu.net --}}
                                 <a class="btn item-service text-center" target="_blank"
