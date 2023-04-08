@@ -10,6 +10,7 @@
         crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ asset('/img/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('/css/dashboard-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/super-admin-style.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 </head>
 
