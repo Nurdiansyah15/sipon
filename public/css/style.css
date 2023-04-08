@@ -43,7 +43,37 @@ body {
     width: 100px;
     color: #fff;
 }
+.btn-long-off {
+    background-color: none;
+    border: solid 1px #114f5a;
+    border-radius: 20px;
+    width: 100px;
+    color: #114f5a;
+}
+.btn-long-off:hover {
+    background-color: #c49450;
+    border-radius: 20px;
+    width: 100px;
+    color: #fff;
+}
 
+.btn-circle-off {
+    background-color: none;
+    border: solid 1px #114f5a;
+    border-radius: 100%;
+    color: #114f5a;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+.btn-circle-off:hover {
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    background-color: #c49450;
+    border-radius: 100%;
+    color: #fff;
+}
 .btn-circle {
     background-color: #114f5a;
     border-radius: 100%;

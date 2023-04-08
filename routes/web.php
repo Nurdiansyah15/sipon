@@ -4,6 +4,7 @@ use App\Http\Controllers\WEB\AdministratorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\AuthController;
 use App\Http\Controllers\WEB\DashboardController;
+use App\Http\Controllers\WEB\RoleUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/super_admin', [AdministratorController::class, 'index']);
+    Route::post('/super_admin/roleuser', [RoleUserController::class, 'create']);
+    Route::delete('/super_admin/roleuser', [RoleUserController::class, 'destroy']);
 
 
     Route::get('/logout', [AuthController::class, 'logout']);

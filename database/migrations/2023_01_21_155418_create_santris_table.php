@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('fullname', 100)->nullable();
             $table->string('hobby', 20)->nullable();
             $table->string('purpose', 20)->nullable();
+            $table->string('motivation_entry', 255)->nullable();
             $table->string('workplace', 50)->nullable();
             $table->string('department', 50)->nullable();
             $table->string('status', 1)->nullable();
@@ -66,6 +67,7 @@ return new class extends Migration
             $table->string('guardian_job', 50)->nullable();
             $table->string('guardian_graduate', 50)->nullable();
             $table->string('guardian_income', 20)->nullable();
+            $table->string('guardian_relationship', 50)->nullable();
             $table->string('path_photo', 100)->nullable();
 
             $table->string('option', 1)->nullable();

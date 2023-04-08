@@ -1,7 +1,7 @@
         {{-- navbar --}}
         <nav class="navbar">
             <div class="col-md-8">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="{{ asset('/img/logo-sipon.png') }}" alt="Logo" width="200"
                         class="d-inline-block align-text-top">
                 </a>

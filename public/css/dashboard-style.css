@@ -3,6 +3,19 @@
     margin: auto;
 }
 
+.dashboard-content {
+    padding: 0 20px 0 15px;
+}
+
+.content-title {
+    color: #114f5a;
+    font-size: 20px;
+    font-weight: 700;
+    font-weight: 700;
+    padding: 0 0 0 10px;
+    margin-bottom: 10px;
+}
+
 .photo {
     vertical-align: middle;
     width: 150px;

@@ -1,0 +1,29 @@
+.title {
+    color: #114f5a;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 20px 20px 20px 20px;
+}
+
+.dropdown-item:hover {
+    background: none;
+}
+
+.dropdown-item button {
+    background: none;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+.dropdown-item button:hover {
+    height: 15px;
+    width: 15px;
+    background-color: red;
+}
+
+.navbar-content .nav-link {
+    font-size: 20px;
+}
