@@ -10,6 +10,7 @@ use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use App\Helpers\ApiFormatter;
 use App\Helpers\NisGenerator;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -72,13 +73,14 @@ class SantriController extends Controller
     {
         try {
             $fields = $request->validate([
-                'nis' => 'string',
+                'nis' => 'string|unique:santris',
                 'fullname' => 'string|required',
                 'nickname' => 'string|required',
-                'email' => 'string|email:rfc,dns|required',
+                'email' => 'string|email:rfc,dns|required|unique:santris',
                 'program' => 'string|required',
                 'option' => 'string|required',
-            ]);
+            ],
+            [ 'unique' => ':attribute sudah digunakan']);
 
             if (!isset($fields['nis'])) {
                 $fields['nis'] = NisGenerator::get($fields['option']);
@@ -162,7 +164,7 @@ class SantriController extends Controller
         try {
             $fields = $request->validate([
                 'nickname' => 'string',
-                'email' => 'email:rfc,dns',
+                'email' => ['email:rfc,dns',Rule::unique('santris', 'email')->ignore($nis, 'nis')],
                 'fullname' => 'string',
                 'hobby' => 'string',
                 'purpose' => 'string',
@@ -209,7 +211,8 @@ class SantriController extends Controller
                 'guardian_income' => 'string',
                 'path_photo' => 'string',
                 'option' => 'string',
-            ]);
+            ],
+            [ 'unique' => ':attribute sudah digunakan']);
 
             Santri::where('nis', $nis)->update($fields);
 
