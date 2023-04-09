@@ -173,7 +173,7 @@ class RegisterController extends Controller
                 'path_doc' => 'string|nullable',
                 'path_mutasi_emis' => 'string|nullable',
             ]);
-
+            $fields['password'] = bcrypt($fields['password']);
             Register::where('id', $id)->update($fields);
 
             $data = Register::where('id', $id)->first();
