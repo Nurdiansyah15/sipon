@@ -20,7 +20,6 @@
 .box-short-profile {
     transition-property: max-content;
     transition-duration: 0.4s;
-    width: max-content;
 }
 
 .photo {
