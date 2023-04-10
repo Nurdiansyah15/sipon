@@ -9,9 +9,9 @@
         rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
         crossorigin="anonymous">
     <link rel="shortcut icon" href="{{ asset('/img/logo.png') }}">
-    <link rel="stylesheet" href="{{ asset('/css/dashboard-style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/super-admin-style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/dashboard-style.css') }}?<?php echo time(); ?>">
+    <link rel="stylesheet" href="{{ asset('/css/super-admin-style.css') }}?<?php echo time(); ?>">
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}?<?php echo time(); ?>">
 </head>
 
 <body>
@@ -31,6 +31,7 @@
     </script>
     {{-- icon kit nurdinurdiansyah15@gmail.com --}}
     <script src="https://kit.fontawesome.com/dd5538ca6a.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('/js/script.js') }}?<?php echo time(); ?>"></script>
 </body>
 
 </html>

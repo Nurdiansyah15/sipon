@@ -14,6 +14,13 @@
     font-weight: 700;
     padding: 0 0 0 10px;
     margin-bottom: 10px;
+    width: 100%;
+}
+
+.box-short-profile {
+    transition-property: max-content;
+    transition-duration: 0.4s;
+    width: max-content;
 }
 
 .photo {
@@ -23,12 +30,24 @@
     border-radius: 50%;
     background-position: top;
     background-size: cover;
+    margin: auto;
+    margin-top: 30px;
+    object-fit: cover;
+}
+.col-9.m-auto.line {
+    margin-bottom: 20px;
 }
 
 .name {
     color: black;
     font-size: 18px;
     font-weight: bold;
+    margin: 20px 0 0 0;
+    text-align: center;
+}
+.nis {
+    font-size: 16px;
+    text-align: center;
 }
 
 .identity {
@@ -95,6 +114,59 @@ hr {
 }
 
 @media only screen and (max-width: 768px) {
+    .content {
+        width: 100%;
+    }
+
+    .user-information {
+        margin-bottom: 10px;
+        margin-top: 50px !important;
+    }
+
+    .content-title {
+        position: absolute;
+        transform: translateY(-180px);
+        /* transform: translateY(-395px); */
+    }
+
+    .dashboard-content {
+        padding: 0 0 0 0;
+    }
+
+    .short-profile {
+        display: flex;
+        cursor: pointer;
+    }
+
+    .photo {
+        width: 80px;
+        height: 80px;
+        margin: 20px 20px 10px 40px;
+    }
+
+    .item-short-profile {
+        display: block;
+    }
+
+    .name {
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        margin: 20px 0 0 0;
+    }
+    .nis {
+        font-size: 18px;
+    }
+
+    .profile-item {
+        overflow: hidden;
+        display: none;
+    }
+    .col-9.m-auto.line {
+        overflow: hidden;
+        display: none;
+    }
+
     .col-md-3 {
         padding: 0;
         margin-top: 15px;

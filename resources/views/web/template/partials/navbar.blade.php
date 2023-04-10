@@ -10,7 +10,7 @@
                 <div class="logout">
                     <form action="/logout" method="GET">
                         @csrf
-                        <button type="submit" class="btn btn-long m-2"><i
+                        <button type="submit" class="btn btn-long m-2" id="button-logout"><i
                                 class="fa-solid fa-right-from-bracket mx-2"></i>Logout</button>
                     </form>
                 </div>
