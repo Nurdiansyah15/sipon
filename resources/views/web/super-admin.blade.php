@@ -5,7 +5,7 @@
         <div class="col-md-3 user-information">
             <div class="box-short-profile card my-shape" id="shape">
                 <div class="short-profile" id="short-profile">
-                    <div class="photo" style="background-image: url({{ asset('/img/me.png') }})">
+                    <div class="photo" style="background-image: url({{ asset('/img/user.png') }})">
                         <div class="button-photo m-auto">
                             <button type="button" class="btn btn-circle"><i class="fa-solid fa-pen-to-square"></i></button>
                         </div>
