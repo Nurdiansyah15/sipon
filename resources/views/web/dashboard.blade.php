@@ -41,28 +41,26 @@
             </div>
         </div>
         <div class="col-md-9 dashboard-content">
-            <div class="box-absolute">
-                <div class="row content-title d-flex align-items-center" id="content-title">
-                    {{-- <a style="width:max-content;color:#114f5a" href="/"><i class="fa-solid fa-left-long"></i></a> --}}
-                    {{-- Super Admin --}}
-                    <nav class="navbar m-0 navbar-expand navbar-light navbar-content">
-                        <div class="container-fluid">
-                            {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
-                            {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <div class="row content-title d-flex align-items-center" id="content-title">
+                {{-- <a style="width:max-content;color:#114f5a" href="/"><i class="fa-solid fa-left-long"></i></a> --}}
+                {{-- Super Admin --}}
+                <nav class="navbar m-0 navbar-expand navbar-light navbar-content">
+                    <div class="container-fluid">
+                        {{-- <a class="navbar-brand" href="#">Navbar</a> --}}
+                        {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                                 aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button> --}}
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link active disabled" aria-current="page" href="/">Dashboard</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active disabled" aria-current="page" href="/">Dashboard</a>
+                                </li>
+                            </ul>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             </div>
             <div class="announ my-shape col-md-12">
                 <div class="title-service">
