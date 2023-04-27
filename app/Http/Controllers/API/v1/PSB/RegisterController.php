@@ -43,6 +43,7 @@ class RegisterController extends Controller
                 'phone' => 'string|required|unique:registers,nik',
                 'email' => 'string|email:rfc,dns|required|unique:registers,nik',
                 'program' => 'string|required',
+                'type' => 'string|required',
                 'option' => 'string|required',
                 'setting_id' => 'integer|required',
                 'password' => 'string|required'
@@ -175,9 +176,9 @@ class RegisterController extends Controller
             ]);
             if(isset($fields['password'])){
                 $fields['password'] = bcrypt($fields['password']);
-                
+
             }
-            
+
             Register::where('id', $id)->update($fields);
 
             $data = Register::where('id', $id)->first();
