@@ -70,6 +70,7 @@ return new class extends Migration
             $table->string('guardian_relationship', 50)->nullable();
             $table->string('path_photo', 100)->nullable();
 
+            $table->string('type', 1)->nullable();
             $table->string('option', 1)->nullable();
             $table->date('joined_at')->nullable();
             $table->timestamps();

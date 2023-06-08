@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('fullname', 100)->required();
             $table->string('email', 100)->required();
             $table->string('program', 50)->required();
+            $table->string('type', 1)->required();
             $table->string('option', 1)->required();
             $table->string('nik', 50)->required();
             $table->string('phone', 50)->required();
