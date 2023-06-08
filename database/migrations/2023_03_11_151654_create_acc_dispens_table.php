@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sec_acts_permits', function (Blueprint $table) {
+        Schema::create('acc_dispens', function (Blueprint $table) {
             $table->id();
+            $table->string('dispen_desc');
+
             $table->string('nis', 50)->constrained()->required(); //
             $table->foreign('nis')->references('nis')->on('santris')->cascadeOnDelete();
-            $table->string('nis_user')->constrained()->required();
-            $table->foreign('nis_user')->references('nis_santri')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('sec_acts_id')->constrained()->required(); //
-            $table->foreign('sec_acts_id')->references('id')->on('sec_acts')->cascadeOnDelete();
-            $table->boolean('confirmed', 1)->nullable();
-            $table->string('reason', 100);
+
+            $table->string('dispen_periode');
+            $table->date('pay_at');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sec_acts_permits');
+        Schema::dropIfExists('dispens');
     }
 };

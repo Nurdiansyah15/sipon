@@ -122,8 +122,8 @@ class DatabaseSeeder extends Seeder
             "role_id" => 2 //default santri
         ]);
 
-        \App\Models\Security\SecActs::factory()->create([
-            'name' => "Madrasah Diniyyah"
-        ]);
+        // \App\Models\Security\SecActs::factory()->create([
+        //     'name' => "Madrasah Diniyyah"
+        // ]);
     }
 }

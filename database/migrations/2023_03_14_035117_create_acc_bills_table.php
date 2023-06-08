@@ -13,16 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sec_acts_permits', function (Blueprint $table) {
+        Schema::create('acc_bills', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('bill_amount');
+            $table->bigInteger('bill_remainder');
+            $table->string('due_date');
+            $table->foreignId('account_id');
+
+
+
             $table->string('nis', 50)->constrained()->required(); //
             $table->foreign('nis')->references('nis')->on('santris')->cascadeOnDelete();
-            $table->string('nis_user')->constrained()->required();
-            $table->foreign('nis_user')->references('nis_santri')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('sec_acts_id')->constrained()->required(); //
-            $table->foreign('sec_acts_id')->references('id')->on('sec_acts')->cascadeOnDelete();
-            $table->boolean('confirmed', 1)->nullable();
-            $table->string('reason', 100);
+            $table->string('nis_operator', 50)->unique()->constrained()->required();
+            $table->foreign('nis_operator')->references('nis_santri')->on('users')->cascadeOnDelete();
+
+
+            $table->integer('payment_status');
             $table->timestamps();
         });
     }
@@ -34,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sec_acts_permits');
+        Schema::dropIfExists('bills');
     }
 };

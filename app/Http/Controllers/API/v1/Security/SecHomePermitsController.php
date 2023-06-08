@@ -5,10 +5,10 @@ namespace App\Http\Controllers\API\v1\Security;
 use Illuminate\Http\Request;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
-use App\Models\Security\SecActsPermits;
+use App\Models\Security\SecHomePermits;
 use Illuminate\Validation\ValidationException;
 
-class SecActsPermitsController extends Controller
+class SecHomePermitsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class SecActsPermitsController extends Controller
      */
     public function index()
     {
-        $data = SecActsPermits::with('santri', 'activity')->get();
+        $data = SecHomePermits::with('santri')->get();
 
         if ($data) {
             return ApiFormatter::createApi(200, 'Success', $data);
@@ -36,14 +36,17 @@ class SecActsPermitsController extends Controller
         try {
             $fields = $request->validate([
                 'nis' => 'string|required',
-                'nis_user' => 'string|required',
-                'sec_acts_id' => 'integer|required',
-                'confirmed' => 'boolean|nullable',
-                'reason' => 'string|required',
-                'create_at' => 'date|required'
+                'nis_approval' => 'string|required',
+                'nis_recipient' => 'string|required',
+                'go' => 'date|required',
+                'return' => 'date|required',
+                'arrival' => 'date|required',
+                'status' => 'boolean|required',
+                'is_lead_approval' => 'boolean|required',
+                'description' => 'string|required'
             ]);
 
-            $data = SecActsPermits::create($fields);
+            $data = SecHomePermits::create($fields);
 
             if ($data) {
                 return ApiFormatter::createApi(201, 'Created', $data);
@@ -74,7 +77,7 @@ class SecActsPermitsController extends Controller
      */
     public function show($id)
     {
-        $data = SecActsPermits::where('id', $id)->with('santri', 'activity')->first();
+        $data = SecHomePermits::where('id', $id)->with('santri')->first();
 
         if ($data) {
             return ApiFormatter::createApi(200, 'Success', $data);
@@ -106,16 +109,18 @@ class SecActsPermitsController extends Controller
         try {
             $fields = $request->validate([
                 'nis' => 'string',
-                'nis_user' => 'string',
-                'sec_acts_id' => 'integer',
-                'confirmed' => 'boolean',
-                'reason' => 'string',
-                'create_at' => 'date'
-
+                'nis_approval' => 'string',
+                'nis_recipient' => 'string',
+                'go' => 'date',
+                'return' => 'date',
+                'arrival' => 'date',
+                'status' => 'boolean',
+                'is_lead_approval' => 'boolean',
+                'description' => 'string'
             ]);
 
-            SecActsPermits::where('id', $id)->update($fields);
-            $data = SecActsPermits::where('id', $id)->with('santri', 'activity')->first();
+            SecHomePermits::where('id', $id)->update($fields);
+            $data = SecHomePermits::where('id', $id)->with('santri')->first();
 
             if ($data) {
                 return ApiFormatter::createApi(201, 'Updated', $data);
@@ -135,7 +140,7 @@ class SecActsPermitsController extends Controller
      */
     public function destroy($id)
     {
-        $data = SecActsPermits::where('id', $id)->first();
+        $data = SecHomePermits::where('id', $id)->first();
         if ($data) {
             $data->delete();
             return ApiFormatter::createApi(200, 'Success destroy data');

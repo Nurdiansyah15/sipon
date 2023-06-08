@@ -9,6 +9,7 @@ use App\Http\Controllers\API\v1\UserController;
 use App\Http\Controllers\API\v1\SantriController;
 use App\Http\Controllers\API\v1\Security\SecActsController;
 use App\Http\Controllers\API\v1\Security\SecActsPermitsController;
+use App\Http\Controllers\API\v1\Security\SecHomePermitsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,11 @@ Route::prefix('v1')->group(function () {
             Route::get('/permits/{id}', [SecActsPermitsController::class, 'show']); //( sudah )
             Route::put('/permits/{id}', [SecActsPermitsController::class, 'update']); //( sudah )
             Route::delete('/permits/{id}', [SecActsPermitsController::class, 'destroy']); //( sudah )
+            Route::get('/home_permits', [SecHomePermitsController::class, 'index']); //( sudah )
+            Route::post('/home_permits', [SecHomePermitsController::class, 'create']); //( sudah )
+            Route::get('/home_permits/{id}', [SecHomePermitsController::class, 'show']); //( sudah )
+            Route::put('/home_permits/{id}', [SecHomePermitsController::class, 'update']); //( sudah )
+            Route::delete('/home_permits/{id}', [SecHomePermitsController::class, 'destroy']); //( sudah )
             Route::get('/acts', [SecActsController::class, 'index']); //( sudah )
             Route::post('/acts', [SecActsController::class, 'create']); //( sudah )
             Route::get('/acts/{id}', [SecActsController::class, 'show']); //( sudah )
